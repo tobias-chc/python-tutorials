@@ -3,7 +3,7 @@ from datetime import date, timedelta
 from tutorials.pydantic_demo.models import Employee
 
 
-def models_examples():
+def models_example():
     # EXAMPLE 1: Object instantiation using explicit values
     test_employee = Employee(
         name="Tobias",
@@ -118,13 +118,15 @@ def model_validator_example():
 if __name__ == "__main__":
 
     # Creating models from: explict values, dict
-    models_examples()
+    models_example()
 
-    # Using fields
+    # Using field validation
     fields_example()
 
+    print("--- EXAMPLES: `field_validators ---")
     # Using `field_validators`
     field_validator_example()
 
+    print("--- EXAMPLES: `model_validator ---")
     # Using `model_validator`
     model_validator_example()
