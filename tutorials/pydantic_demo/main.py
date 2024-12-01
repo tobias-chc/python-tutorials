@@ -99,6 +99,22 @@ def field_validator_example():
         print(f"Error: {e}\n")
 
 
+def model_validator_example():
+    print("--- EXAMPLE 1: IT employee ---")
+    it_employee_data = {
+        "name": "Tobias",
+        "email": "tobias@pydantic.com",
+        "birth_date": "1995-12-03",
+        "salary": 1000,
+        "department": "IT",
+        "elected_benefits": True,
+    }
+    try:
+        Employee.model_validate(it_employee_data)
+    except Exception as e:
+        print(f"Error: {e}\n")
+
+
 if __name__ == "__main__":
 
     # Creating models from: explict values, dict
@@ -109,3 +125,6 @@ if __name__ == "__main__":
 
     # Using `field_validators`
     field_validator_example()
+
+    # Using `model_validator`
+    model_validator_example()
