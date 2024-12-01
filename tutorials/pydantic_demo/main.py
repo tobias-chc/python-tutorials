@@ -1,4 +1,5 @@
 import json
+from datetime import date, timedelta
 from tutorials.pydantic_demo.models import Employee
 
 
@@ -82,6 +83,22 @@ def fields_example():
         print(f"Error: {e}\n")
 
 
+def field_validator_example():
+    print("--- EXAMPLE 1: Young employee ---")
+    young_employee_data = {
+        "name": "Emily",
+        "email": "emily@pydantic.com",
+        "birth_date": date.today() - timedelta(days=365 * 17),
+        "salary": 1000,
+        "department": "ENGINEERING",
+        "elected_benefits": True,
+    }
+    try:
+        Employee.model_validate(young_employee_data)
+    except Exception as e:
+        print(f"Error: {e}\n")
+
+
 if __name__ == "__main__":
 
     # Creating models from: explict values, dict
@@ -89,3 +106,6 @@ if __name__ == "__main__":
 
     # Using fields
     fields_example()
+
+    # Using `field_validators`
+    field_validator_example()

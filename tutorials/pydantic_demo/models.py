@@ -2,7 +2,13 @@ from datetime import date
 from enum import Enum
 from uuid import UUID, uuid4
 
-from pydantic import BaseModel, ConfigDict, EmailStr, Field
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    EmailStr,
+    Field,
+    field_validator,
+)
 
 
 class Department(Enum):
@@ -21,3 +27,14 @@ class Employee(BaseModel):
     salary: float = Field(gt=0, repr=False)
     department: Department
     elected_benefits: bool
+
+    @field_validator("date_of_birth")
+    @classmethod
+    def check_valid_age(cls, date_of_birth: date) -> date:
+        today = date.today()
+        _18_years_ago = date(today.year - 18, today.month, today.day)
+
+        if date_of_birth > _18_years_ago:
+            raise ValueError("Employees must be at least 18 years old.")
+
+        return date_of_birth
