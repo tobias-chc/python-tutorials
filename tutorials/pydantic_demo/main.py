@@ -1,6 +1,7 @@
 import json
 from datetime import date, timedelta
 from tutorials.pydantic_demo.models import Employee
+from tutorials.pydantic_demo.validate_call import send_invoice
 
 
 def models_example():
@@ -115,6 +116,27 @@ def model_validator_example():
         print(f"Error: {e}\n")
 
 
+def validate_call_example():
+    print("\n--- EXAMPLE 1: Wrong data ---")
+    try:
+        send_invoice(
+            client_name="",
+            client_email="lasdfakedomain.com",
+            items_purchased=["pie", 13],
+            amount_owed=0,
+        )
+    except Exception as e:
+        print(f"Error: {e}\n")
+    print("\n--- EXAMPLE 2: Correct Data ---")
+    email_str = send_invoice(
+        client_name="Skinny Pete",
+        client_email="skinnyp@fakedomain.com",
+        items_purchased=["pie", "iphone"],
+        amount_owed=1300.0,
+    )
+    print(f"Created email: {email_str}\n")
+
+
 if __name__ == "__main__":
 
     # Creating models from: explict values, dict
@@ -130,3 +152,7 @@ if __name__ == "__main__":
     print("--- EXAMPLES: `model_validator ---")
     # Using `model_validator`
     model_validator_example()
+
+    print("--- EXAMPLES: `validate_call` ---")
+    # Using 'validate_call'
+    validate_call_example()
