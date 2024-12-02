@@ -1,7 +1,9 @@
+import os
 import json
 from datetime import date, timedelta
 from tutorials.pydantic_demo.models import Employee
 from tutorials.pydantic_demo.validate_call import send_invoice
+from tutorials.pydantic_demo.settings_management import AppConfig
 
 
 def models_example():
@@ -137,6 +139,21 @@ def validate_call_example():
     print(f"Created email: {email_str}\n")
 
 
+def settings_management_example():
+    # Define your environment variables here (replace with your actual values)
+    env_vars = {
+        "database_host": "http://localhost:5432",  # Example URL
+        "database_user": "admin",
+        "database_password": "password123",
+        "api_key": "FAKEEMKDIV2424545JSFIDSINF34369",
+    }
+    # Set the validated variables as environment variables
+    for key, value in env_vars.items():
+        os.environ[key] = value
+
+    print(f"Created AppConfig: {AppConfig()}\n")
+
+
 if __name__ == "__main__":
 
     # Creating models from: explict values, dict
@@ -156,3 +173,7 @@ if __name__ == "__main__":
     print("--- EXAMPLES: `validate_call` ---")
     # Using 'validate_call'
     validate_call_example()
+
+    # Using 'pydantic_settings'
+    print("--- EXAMPLES: Settings Management ---")
+    settings_management_example()
