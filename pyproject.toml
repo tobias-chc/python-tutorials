@@ -1,12 +1,11 @@
 [tool.poetry]
-name = "tutorials"
-version = "0.1.0"
 description = "Collection of Python tutorials and practical use cases for learning and reference."
 authors = ["Tobías Chavarría <tobias.chavarria.castro@gmail.com>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "~=3.11,<3.12"
 pydantic = {extras = ["email"], version = "^2.10.2"}
 pydantic-settings = "^2.6.1"
 requests = "^2.32.3"
@@ -14,6 +13,12 @@ flask = "^3.1.0"
 fastapi = "^0.115.6"
 uvicorn = "^0.32.1"
 
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.12.0"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
 
 [build-system]
 requires = ["poetry-core"]
