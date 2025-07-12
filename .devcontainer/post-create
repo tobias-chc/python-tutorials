@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -ex
+
+echo "Running post-create script..."
+
+# install dependencies and activate the virtual environment
+poetry install
+echo "eval $(poetry env activate)" >> ~/.zshrc
+export PYTHONPATH="/workspaces/python-tutorials:$PYTHONPATH"

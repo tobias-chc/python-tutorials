@@ -1,0 +1,40 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.238.0/containers/python-3
+{
+    "name": "python3",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "..",
+        "args": {
+            // Update 'VARIANT' to pick a Python version: 3.11, ...
+            // https://mcr.microsoft.com/en-us/artifact/mar/devcontainers/python/tags
+            // Append -bullseye or -buster to pin to an OS version.
+            "VARIANT": "3.11-bullseye",
+            "POETRY_VERSION": "2.1.0"
+        }
+    },
+    // Configure tool-specific properties.
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "ms-python.python",
+                "charliermarsh.ruff"
+            ],
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "defaultInterpreterPath": "/usr/local/bin/python",
+                "editor.formatOnSave": true,
+                "editor.defaultFormatter": "charliermarsh.ruff"
+            }
+        }
+    },
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "bash ./.devcontainer/post-create",
+    // Configure SSH to allow connections.
+    // https://code.visualstudio.com/remote/advancedcontainers/sharing-git-credentials
+    // https://www.ssh.com/academy/ssh/agent#ssh-agent-forwarding
+    "remoteUser": "vscode"
+}
